@@ -1,0 +1,42 @@
+{{ if gt (where .Site.RegularPages "Section" "media") 0}}
+{{"<!-- Start Media Section -->" | safeHTML}}
+<section id="media" class="section">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				{{"<!-- section title -->" | safeHTML}}
+				<div class="title text-center wow fadeInDown">
+					<h2>{{ with i18n "mediaTitle" }} {{ index (split . " ") 0 }} {{ end }}<span class="color">
+						{{ with i18n "mediaTitle" }} {{ index (split . " ") 1 }} {{ end }}</span></h2>
+					<div class="border-meghna"></div>
+				</div>
+			</div>
+			{{"<!-- /section title -->" | safeHTML}}
+
+			{{ range first 3 (where .Site.RegularPages "Section" "media") }}
+			{{"<!-- single media post -->" | safeHTML}}
+			<article class="col-lg-4 col-md-6 col-12 clearfix wow fadeInUp" data-wow-duration="500ms">
+				<div class="post-block">
+					<div class="media-wrapper">
+						<img src="{{ .Params.Image | absURL }}" onerror="this.onerror=null; this.src='images/m17_logo_shadow_60h.png'" alt="post-image" class="img-fluid">
+					</div>
+
+					<div class="content">
+						<h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+						<p>{{ .Summary }}</p>
+						<a class="btn btn-transparent" href="{{ .Params.Link }}" target="_blank">{{ i18n "mediaGoTo" }}</a>
+					</div>
+				</div>
+			</article>
+			{{"<!-- /single media post -->" | safeHTML}}
+			{{ end }}
+
+			<div class="all-post text-center col-lg-12">
+				<a class="btn btn-main"
+					href="{{ `media` | absLangURL }}">{{ i18n "viewAllMedia" }}</a>
+			</div>
+		</div>
+	</div>
+</section>
+{{"<!-- /media -->" | safeHTML}}
+{{ end }}
